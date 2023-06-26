@@ -29,14 +29,23 @@ public class InvoiceService {
 
         Client clientExist = clientService.obtenerCliente(requestInvoice.getClient_id());
         List<Product> productList = productService.getProductsById(requestInvoice.getProduct_list());
-        System.out.println(productList);
-
-        double total = 0;
         int i = 0;
+        for (Product productStock:
+                productList) {
+            if (requestInvoice.getProduct_list().get(i).getQuantity() > productStock.getStock()){
+                throw new Exception("Not enough stock");
+            }
+            i++;
+        }
+
+        int j = 0;
+        double total = 0;
         for (Product product:
                 productList) {
-            total += product.getPrice() * requestInvoice.getProduct_list().get(i).getQuantity();
-            i++;
+            total += product.getPrice() * requestInvoice.getProduct_list().get(j).getQuantity();
+            int newStock = product.getStock() - requestInvoice.getProduct_list().get(j).getQuantity();
+            product.setStock(newStock);
+            j++;
         }
 
         Invoice invoiceCreated = new Invoice();
