@@ -2,6 +2,8 @@ package com.Java.FacturacionEntregaProyectoFinalRossi.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "client")
 public class Client {
@@ -11,6 +13,17 @@ public class Client {
     private String name;
     private String lastname;
     private int docnumber;
+
+    @OneToMany(mappedBy = "client")
+    private List<Invoice> invoice;
+
+    public List<Invoice> getInvoice() {
+        return invoice;
+    }
+
+    public void setInvoice(List<Invoice> invoice) {
+        this.invoice = invoice;
+    }
 
     public int getId() {
         return id;

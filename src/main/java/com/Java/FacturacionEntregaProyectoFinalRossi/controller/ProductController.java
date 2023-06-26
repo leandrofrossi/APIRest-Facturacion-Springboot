@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(path = "api/product")
 public class ProductController {
@@ -26,7 +28,7 @@ public class ProductController {
         } catch (Exception e){
             return ResponseHandler.generateResponse(
                     e.getMessage(),
-                    HttpStatus.INTERNAL_SERVER_ERROR,
+                    HttpStatus.OK,
                     null
             );
         }
@@ -44,7 +46,65 @@ public class ProductController {
         } catch (Exception e) {
             return ResponseHandler.generateResponse(
                     e.getMessage(),
-                    HttpStatus.INTERNAL_SERVER_ERROR,
+                    HttpStatus.OK,
+                    null
+            );
+        }
+    }
+    @GetMapping
+    public ResponseEntity<Object> getAll() {
+        try {
+            List<Product> products = productoService.getAll();
+            return ResponseHandler.generateResponse(
+                    "Product get successfully",
+                    HttpStatus.OK,
+                    products
+            );
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(
+                    e.getMessage(),
+                    HttpStatus.OK,
+                    null
+            );
+        }
+    }
+
+    @PutMapping(path = "{product_id}")
+    public ResponseEntity<Object> modificarProducto (
+            @PathVariable("product_id") int id,
+            @RequestBody Product product
+    ) {
+        try {
+
+            productoService.modificarProducto (product, id);
+            return ResponseHandler.generateResponse(
+                    "Product data updated successfully",
+                    HttpStatus.OK,
+                    null
+            );
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(
+                    e.getMessage(),
+                    HttpStatus.OK,
+                    null
+            );
+        }
+    }
+
+    @DeleteMapping(path = "{id}")
+    public ResponseEntity<Object> borrarProducto (@PathVariable() int id) {
+        try {
+            System.out.println(id);
+            productoService.borrarProducto(id);
+            return ResponseHandler.generateResponse(
+                    "Product deleted successfully",
+                    HttpStatus.OK,
+                    null
+            );
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(
+                    e.getMessage(),
+                    HttpStatus.OK,
                     null
             );
         }

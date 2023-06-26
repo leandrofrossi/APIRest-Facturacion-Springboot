@@ -26,7 +26,7 @@ public class ClientController {
         } catch (Exception e){
             return ResponseHandler.generateResponse(
                     e.getMessage(),
-                    HttpStatus.INTERNAL_SERVER_ERROR,
+                    HttpStatus.OK,
                     null
             );
         }
@@ -44,7 +44,47 @@ public class ClientController {
         } catch (Exception e) {
             return ResponseHandler.generateResponse(
                     e.getMessage(),
-                    HttpStatus.INTERNAL_SERVER_ERROR,
+                    HttpStatus.OK,
+                    null
+            );
+        }
+    }
+
+    @PutMapping(path = "{client_id}")
+    public ResponseEntity<Object> modificarCliente (
+            @PathVariable("client_id") int id,
+            @RequestBody Client client
+    ) {
+        try {
+            clienteService.modificarCliente(client, id);
+            return ResponseHandler.generateResponse(
+                    "Data updated successfully",
+                    HttpStatus.OK,
+                    null
+            );
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(
+                    e.getMessage(),
+                    HttpStatus.OK,
+                    null
+            );
+        }
+    }
+
+    @DeleteMapping(path = "{id}")
+    public ResponseEntity<Object> borrarCliente (@PathVariable() int id) {
+        try {
+            System.out.println(id);
+            clienteService.borrarCliente(id);
+            return ResponseHandler.generateResponse(
+                    "Client deleted successfully",
+                    HttpStatus.OK,
+                    null
+            );
+        } catch (Exception e) {
+            return ResponseHandler.generateResponse(
+                    e.getMessage(),
+                    HttpStatus.OK,
                     null
             );
         }
