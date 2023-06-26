@@ -80,7 +80,7 @@ public class InvoiceService {
     public InvoiceWithDetailsDTO getInvoiceById (int invoice_id) throws Exception {
         Optional<Invoice> invoiceFound = invoiceRepository.findById(invoice_id);
         if (invoiceFound.isEmpty()) {
-            throw new Exception("Invoice not found");
+            throw new Exception("Invoice with id: " + invoice_id + " not found.");
         }
 
         List<InvoiceDetailDTO> invoice_details = invoiceDetailService.getInvoiceDetailsByInvoiceId(invoice_id);

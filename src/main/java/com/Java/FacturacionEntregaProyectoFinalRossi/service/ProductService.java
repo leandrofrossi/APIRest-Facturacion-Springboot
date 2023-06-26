@@ -45,7 +45,7 @@ public class ProductService {
     public void modificarProducto(Product product, int id) throws Exception {
         Optional<Product> productoExistente = productoRepository.findById(id);
         if(productoExistente.isEmpty()){
-            throw new Exception("Product not exist");
+            throw new Exception("Product with id: " + id + " not found.");
         } else {
             productoExistente.get().setTitle(product.getTitle());
             productoExistente.get().setDescription(product.getDescription());
@@ -59,7 +59,7 @@ public class ProductService {
     public void borrarProducto (int id) throws Exception {
         Optional<Product> productoExistente = productoRepository.findById(id);
         if(productoExistente.isEmpty()){
-            throw new Exception("Product not exist");
+            throw new Exception("Product with id: " + id + " not found.");
         } else {
             productoRepository.deleteById(id);
         }

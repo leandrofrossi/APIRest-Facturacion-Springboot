@@ -17,7 +17,7 @@ public class ClientService {
     public Client obtenerCliente(int id) throws Exception {
         Optional<Client> clienteExistente = clienteRepository.findById(id);
         if(clienteExistente.isEmpty()){
-            throw new Exception("Client not exist");
+            throw new Exception("Client with id: " + id + " not found.");
         } else {
             return clienteExistente.get();
         }
@@ -26,7 +26,7 @@ public class ClientService {
     public void modificarCliente(Client client, int id) throws Exception {
         Optional<Client> clienteExistente = clienteRepository.findById(id);
         if(clienteExistente.isEmpty()){
-            throw new Exception("Client not exist");
+            throw new Exception("Client with id: " + id + " not found.");
         } else {
             clienteExistente.get().setDocnumber(client.getDocnumber());
             clienteExistente.get().setName(client.getName());
@@ -38,7 +38,7 @@ public class ClientService {
     public void borrarCliente (int id) throws Exception {
         Optional<Client> clienteExistente = clienteRepository.findById(id);
         if(clienteExistente.isEmpty()){
-            throw new Exception("Client not exist");
+            throw new Exception("Client with id: " + id + " not found.");
         } else {
             clienteRepository.deleteById(id);
         }
