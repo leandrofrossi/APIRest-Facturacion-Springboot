@@ -87,6 +87,7 @@ public class InvoiceService {
 
         return new InvoiceWithDetailsDTO(
                 invoiceFound.get().getId(),
+                invoiceFound.get().getClient().getId(),
                 invoiceFound.get().getCreated_at(),
                 invoiceFound.get().getTotal(),
                 invoice_details
