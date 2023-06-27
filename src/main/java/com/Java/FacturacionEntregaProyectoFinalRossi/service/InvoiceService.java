@@ -94,4 +94,17 @@ public class InvoiceService {
         );
 
     }
+    public void nullClient(int id) throws Exception {
+        List<InvoiceDTO> invoiceList = getInvoicesByClientId(id);
+        if (invoiceList.isEmpty()){
+            System.out.println("OK");
+        } else {
+            for (InvoiceDTO invoice :
+                    invoiceList) {
+                int invoiceID = invoice.getInvoice_id();
+                Optional<Invoice> invoiceMod = invoiceRepository.findById(invoiceID);
+                invoiceMod.get().setClient(null);
+            }
+        }
+    }
 }

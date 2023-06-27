@@ -1,6 +1,5 @@
 package com.Java.FacturacionEntregaProyectoFinalRossi.service;
 
-import com.Java.FacturacionEntregaProyectoFinalRossi.model.Client;
 import com.Java.FacturacionEntregaProyectoFinalRossi.model.Product;
 import com.Java.FacturacionEntregaProyectoFinalRossi.model.ProductDetailRequest;
 import com.Java.FacturacionEntregaProyectoFinalRossi.repository.ProductRepository;

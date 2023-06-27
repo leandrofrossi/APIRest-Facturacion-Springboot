@@ -3,6 +3,7 @@ package com.Java.FacturacionEntregaProyectoFinalRossi.controller;
 import com.Java.FacturacionEntregaProyectoFinalRossi.middleware.ResponseHandler;
 import com.Java.FacturacionEntregaProyectoFinalRossi.model.Client;
 import com.Java.FacturacionEntregaProyectoFinalRossi.service.ClientService;
+import com.Java.FacturacionEntregaProyectoFinalRossi.service.InvoiceService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 public class ClientController {
     @Autowired
     private ClientService clienteService;
+    @Autowired
+    private InvoiceService invoiceService;
 
     @PostMapping
     public ResponseEntity<Object> crearCliente (@RequestBody Client cliente) {
@@ -74,7 +77,7 @@ public class ClientController {
     @DeleteMapping(path = "{id}")
     public ResponseEntity<Object> borrarCliente (@PathVariable() int id) {
         try {
-            System.out.println(id);
+            invoiceService.nullClient(id);
             clienteService.borrarCliente(id);
             return ResponseHandler.generateResponse(
                     "Client deleted successfully",

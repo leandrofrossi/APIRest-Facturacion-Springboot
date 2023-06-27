@@ -2,6 +2,7 @@ package com.Java.FacturacionEntregaProyectoFinalRossi.controller;
 
 import com.Java.FacturacionEntregaProyectoFinalRossi.middleware.ResponseHandler;
 import com.Java.FacturacionEntregaProyectoFinalRossi.model.Product;
+import com.Java.FacturacionEntregaProyectoFinalRossi.service.InvoiceDetailService;
 import com.Java.FacturacionEntregaProyectoFinalRossi.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +16,8 @@ import java.util.List;
 public class ProductController {
     @Autowired
     private ProductService productoService;
+    @Autowired
+    private InvoiceDetailService invoiceDetailService;
 
     @PostMapping
     public ResponseEntity<Object> crearProducto (@RequestBody Product producto) {
@@ -94,7 +97,7 @@ public class ProductController {
     @DeleteMapping(path = "{id}")
     public ResponseEntity<Object> borrarProducto (@PathVariable() int id) {
         try {
-            System.out.println(id);
+            invoiceDetailService.nullProduct(id);
             productoService.borrarProducto(id);
             return ResponseHandler.generateResponse(
                     "Product deleted successfully",

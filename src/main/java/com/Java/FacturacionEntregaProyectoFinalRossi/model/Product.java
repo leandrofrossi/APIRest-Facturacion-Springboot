@@ -73,4 +73,5 @@ public class Product {
                 ", stock=" + stock +
                 '}';
     }
+
 }

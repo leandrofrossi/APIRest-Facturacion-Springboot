@@ -64,6 +64,8 @@ public class InvoiceDetail {
     public String toString() {
         return "InvoiceDetail{" +
                 "id=" + id +
+                ", invoice=" + invoice +
+                ", product=" + product +
                 ", price=" + price +
                 ", quantity=" + quantity +
                 '}';

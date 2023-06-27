@@ -11,6 +11,7 @@ import java.util.Optional;
 public class ClientService {
     @Autowired
     private ClientRepository clienteRepository;
+
     public Client crearCliente(Client cliente) throws Exception {
         return clienteRepository.save(cliente);
     }

@@ -20,4 +20,18 @@ public class InvoiceDetailService {
     public List<InvoiceDetailDTO> getInvoiceDetailsByInvoiceId (int invoice_id) throws Exception {
         return invoiceDetailRepository.getInvoiceDetailsByInvoiceId(invoice_id);
     }
+    public List<InvoiceDetail> getInvoiceDetailsByProductId (int prod_id) throws Exception {
+        return invoiceDetailRepository.getInvoiceDetailsByProductId(prod_id);
+    }
+    public void nullProduct(int id) throws Exception {
+        List<InvoiceDetail> invoiceDetailsList = getInvoiceDetailsByProductId(id);
+        if (invoiceDetailsList.isEmpty()){
+            System.out.println("OK");
+        } else {
+            for (InvoiceDetail invoice :
+                    invoiceDetailsList) {
+                invoice.setProduct(null);
+            }
+        }
+    }
 }
